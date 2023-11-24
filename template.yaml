@@ -1,0 +1,26 @@
+apiVersion: krateo.io/v1alpha1
+kind: Template
+metadata:
+  name: krateo-template-gcpstoragebucket
+spec:
+  owner: krateo
+  title: GCP Storage Bucket
+  description: Provision a GCP Storage Bucket in a Project
+  icon: fa-solid fa-truck-fast
+  tags:
+    - gcp
+    - storagebucket
+    - template
+    - krateo
+  widgets:
+    - title: GCP Storage Bucket
+      description: GCP Storage Bucket
+      properties:
+        - title: Name
+          key: storageBucketName
+          description: Storage Bucket name
+          required: true
+        - title: Project ID
+          key: projectId
+          description: Unique ID of the project
+          required: true

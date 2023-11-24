@@ -1,0 +1,38 @@
+# {{=<% %>=}}
+---
+apiVersion: deployment.krateo.io/v1alpha1
+kind: GcpStorageBucket
+metadata:
+  name: <%#norm%>{{name}}<%/norm%>
+spec:
+  owner: ynap
+  title: <% name %>
+  description: Provision a GCP Storage Bucket in a Project
+  icon: "fa-solid fa-truck-fast"
+  tags:
+    - gcp
+    - storagebucket
+    - template
+    - krateo
+  plugins: []
+  links:
+    - url: https://git.dev.yoox.net/projects/<% projectKey %>/repos/<% projectKey %>
+      title: BitBucket project
+      icon: "fa-brands fa-bitbucket"
+    - url: https://training.jenkins.yoox.net/job/<% projectKey %>
+      title: Jenkins project
+      icon: "fa-brands fa-jenkins"
+    - url: https://sonar-staging-cicd.ynap.biz/portfolio?id=<% projectKey %>_portfolio
+      title: Sonarqube Portfolio
+      icon: "fa-solid fa-code"
+    - url: https://artifactory.saas.aws.prod.e-comm/ui/admin/projects/overview?projectKey=<% projectKey %>
+      title: Artifactory Project
+      icon: "fa-solid fa-frog"
+    - url: https://vault-nonprod.ynap.biz/ui/vault/auth?namespace=ynap&with=oidc
+      title: GSMS NON-PROD
+      icon: "fa-solid fa-key"
+    - url: https://vault.ynap.biz/ui/vault/auth?namespace=ynap&with=oidc
+      title: GSMS PROD
+      icon: "fa-solid fa-key"
+  projectId: <% projectId %>
+  storageBucketName: <% storageBucketName %>

@@ -1,0 +1,4 @@
+gcp-credentials.json
+provider-terraform.yaml
+providerconfig-tf.yaml
+workspace.yaml
