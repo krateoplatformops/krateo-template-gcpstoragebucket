@@ -16,9 +16,9 @@ spec:
     - krateo
   plugins: []
   links:
-    - url: https://test.com
-      title: BitBucket project
-      icon: "fa-brands fa-bitbucket"
+    - url: https://console.cloud.google.com/storage/browser?project=<% projectId %>
+      title: Gcp Storage Bucket
+      icon: "fa-solid fa-bucket"
   name:
   projectId: <% projectId %>
   storageBucketName: <% storageBucketName %>

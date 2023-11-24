@@ -6,7 +6,7 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: deployment.krateo.io/v1alpha1
-    kind: gcpstoragebucket
+    kind: GcpStorageBucket
   resources:
     - base:
         apiVersion: tf.upbound.io/v1beta1
@@ -40,7 +40,7 @@ spec:
                 fmt: |
                   provider "google" {
                     credentials = "gcp-credentials.json"
-                    project     = "%"
+                    project     = "%s"
                   }
 
                   // Modules _must_ use remote state. The provider does not persist state.
