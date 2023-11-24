@@ -1,0 +1,65 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: gcpstoragebucket.deployment.krateo.io
+spec:
+  group: deployment.krateo.io
+  names:
+    kind: GcpStorageBucket
+    plural: gcpstoragebucket
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          properties:
+            spec:
+              properties:
+                owner:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                icon:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                links:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                      title:
+                        type: string
+                      icon:
+                        type: string
+                plugins:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+                      values:
+                        type: array
+                        items:
+                          type: string
+                      type:
+                        type: string
+                      icon:
+                        type: string
+                      endpointName:
+                        type: string
+                projectId:
+                  type: string
+                storageBucketName:
+                  type: string
