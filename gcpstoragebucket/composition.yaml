@@ -23,23 +23,6 @@ spec:
                 namespace: krateo-system
                 name: tf-gcp-creds
                 key: credentials
-          # This optional configuration block can be used to inject HCL into any
-          # workspace that uses this provider config, for example to setup Terraform
-          # providers.
-          configuration: |
-            provider "google" {
-              credentials = "gcp-credentials.json"
-              project     = "krateo-template-storagebucket"
-            }
-
-            // Modules _must_ use remote state. The provider does not persist state.
-            terraform {
-              backend "kubernetes" {
-                secret_suffix     = "provider-tf-secret"
-                namespace         = "krateo-system"
-                in_cluster_config = true
-              }
-            }
       patches:
         - fromFieldPath: metadata.uid
           toFieldPath: metadata.labels[deploymentId]
@@ -73,35 +56,12 @@ spec:
     - base:
         apiVersion: tf.upbound.io/v1beta1
         kind: Workspace
-        metadata:
-          name: example-inline
-          annotations:
-            # The terraform workspace will be named 'coolbucket'. If you omit this
-            # annotation it would be derived from metadata.name - e.g. 'example-inline'.
-            crossplane.io/external-name: ispbucket
         spec:
-          providerConfigRef:
-            name: providerconfig-tf
           forProvider:
             # Workspaces default to using a remote source - like workspace-remote.yaml.
             # For simple cases you can use an inline source to specify the content of
             # main.tf as opaque, inline HCL.
             source: Inline
-            module: |
-              // Outputs are written to the connection secret.
-              output "url" {
-                value       = google_storage_bucket.example.self_link
-              }
-
-              // The google provider and remote state are configured by the provider
-              // config - see providerconfig.yaml.
-              resource "google_storage_bucket" "example" {
-                name = "krateo-example-${terraform.workspace}"
-                location      = "US"
-                force_destroy = true
-
-                public_access_prevention = "enforced"
-              }
           writeConnectionSecretToRef:
             namespace: krateo-system
       patches:
@@ -119,6 +79,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-provider-tf-pc"
+        - fromFieldPath: spec.storageBucketName
+          toFieldPath: metadata.annotations[crossplane.io/external-name]
         - fromFieldPath: spec.storageBucketName
           toFieldPath: spec.forProvider.module
           transforms:
