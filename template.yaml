@@ -12,6 +12,8 @@ spec:
     - storagebucket
     - template
     - krateo
+  url: https://github.com/krateoplatformops/krateo-template-gcpstoragebucket/blob/main/template.yaml
+  endpointName: github
   widgets:
     - title: GCP Storage Bucket
       description: GCP Storage Bucket
